@@ -4,17 +4,17 @@ import useMetaMask from "../shared/hooks/useMetaMask";
 import ButtonImage from "./generic/ButtonImage";
 import styled from "styled-components";
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  gap: 5rem;
-  margin-top: 13rem;
-`;
-
 const ControlButtons = (props) => {
   const { connect } = useMetaMask();
 
   return (
-    <ButtonsContainer>
+    <div
+      style={{
+        display: "flex",
+        gap: "5rem",
+        marginTop: "13rem",
+      }}
+    >
       <ButtonImage
         icon={AddBuddyIcon}
         alt="add buddy"
@@ -29,7 +29,7 @@ const ControlButtons = (props) => {
         height="75"
         handleClick={connect}
       />
-    </ButtonsContainer>
+    </div>
   );
 };
 
