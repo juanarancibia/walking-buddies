@@ -17,7 +17,6 @@ const ButtonImage = (props) => {
     <motion.div
       whileHover={{ scale: 1.2, rotate: 0, transition: 1 }}
       whileTap={{ scale: 0.8, transition: 1 }}
-      style={{ marginTop: "5rem" }}
       onClick={handleClick}
     >
       <StyledImage

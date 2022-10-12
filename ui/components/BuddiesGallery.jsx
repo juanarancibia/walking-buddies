@@ -80,7 +80,7 @@ const BuddiesGallery = () => {
   const [selectedBuddy, setSelectedBuddy] = useState({});
 
   const handleSelect = (buddy) => {
-    setSelectedBuddy(buddy);
+    setSelectedBuddy(buddy.id == selectedBuddy.id ? {} : buddy);
   };
 
   return (

@@ -7,6 +7,7 @@ import styled from "styled-components";
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 5rem;
+  margin-top: 13rem;
 `;
 
 const ControlButtons = (props) => {
