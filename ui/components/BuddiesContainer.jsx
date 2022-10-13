@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { RandomPositionContextProvider } from "../shared/context/RandomPositionContext";
 import ControlButtons from "./ControlButtons";
 import WalkingBuddy from "./WalkingBuddy";
 
 const BuddiesContainer = (props) => {
+  useEffect(() => {}, []);
+
   return (
     <RandomPositionContextProvider>
       <WalkingBuddy

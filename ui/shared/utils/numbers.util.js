@@ -10,8 +10,8 @@ export const getRandomNumber = (min, max) => {
 };
 
 export const getRandomPosition = () => {
-  const winWidth = window.innerWidth * 0.75;
-  const winHeight = window.innerHeight * 0.75;
+  const winWidth = window.innerWidth * 0.95;
+  const winHeight = window.innerHeight * 0.95;
   const randomTop = getRandomNumber(0, winHeight);
   const randomLeft = getRandomNumber(0, winWidth);
 

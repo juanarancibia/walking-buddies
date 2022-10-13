@@ -86,6 +86,10 @@ const BuddiesGallery = () => {
     setSelectedBuddy(buddy.id == selectedBuddy.id ? {} : buddy);
   };
 
+  const handleMintBuddy = () => {
+    mintBuddy(window.ethereum.selectedAddress, selectedBuddy.src);
+  };
+
   return (
     <>
       <StyledH1>Buddies gallery</StyledH1>
@@ -120,7 +124,7 @@ const BuddiesGallery = () => {
         whileHover={{ scale: selectedBuddy.id ? 1.05 : 1 }}
         whileTap={{ scale: selectedBuddy.id ? 0.95 : 1 }}
         hasSelectedBuddy={selectedBuddy.id}
-        onClick={() => mintBuddy(account, selectedBuddy.src)}
+        onClick={handleMintBuddy}
       >
         Mint It!
       </MintBuddyButton>

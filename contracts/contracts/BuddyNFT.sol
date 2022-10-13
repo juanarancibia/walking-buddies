@@ -25,4 +25,12 @@ contract BuddyNFT is ERC721 {
 
         tokenId += 1;
     }
+
+    function getBuddiesByAddress(address _owner)
+        public
+        view
+        returns (buddyMetadata[] memory)
+    {
+        return ownershipRecord[_owner];
+    }
 }
