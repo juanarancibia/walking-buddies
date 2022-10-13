@@ -2,6 +2,8 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
+import { mintBuddy } from "../shared/service/contract";
+import { useWeb3React } from "@web3-react/core";
 
 const buddies = [
   {
@@ -78,6 +80,7 @@ const StyledPlayer = styled(Player)`
 
 const BuddiesGallery = () => {
   const [selectedBuddy, setSelectedBuddy] = useState({});
+  const { account } = useWeb3React();
 
   const handleSelect = (buddy) => {
     setSelectedBuddy(buddy.id == selectedBuddy.id ? {} : buddy);
@@ -117,6 +120,7 @@ const BuddiesGallery = () => {
         whileHover={{ scale: selectedBuddy.id ? 1.05 : 1 }}
         whileTap={{ scale: selectedBuddy.id ? 0.95 : 1 }}
         hasSelectedBuddy={selectedBuddy.id}
+        onClick={() => mintBuddy(account, selectedBuddy.src)}
       >
         Mint It!
       </MintBuddyButton>

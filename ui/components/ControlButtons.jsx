@@ -1,8 +1,7 @@
-import WalletIcon from "../assets/icons/ewallet.png";
 import AddBuddyIcon from "../assets/icons/add-buddy.png";
+import WalletIcon from "../assets/icons/ewallet.png";
 import useMetaMask from "../shared/hooks/useMetaMask";
 import ButtonImage from "./generic/ButtonImage";
-import styled from "styled-components";
 
 const ControlButtons = (props) => {
   const { connect } = useMetaMask();
