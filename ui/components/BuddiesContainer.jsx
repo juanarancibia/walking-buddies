@@ -13,12 +13,13 @@ const BuddiesContainer = (props) => {
 
   const updateBuddies = () => {
     getBuddies().then((buds) => {
-      const mappedBuddies = buds.map((b) => ({
-        id: b.tokenId.toNumber(),
-        src: b.tokenURI,
-        height: "150",
-        width: "150",
-      }));
+      const mappedBuddies =
+        buds?.map((b) => ({
+          id: b.tokenId.toNumber(),
+          src: b.tokenURI,
+          height: "150",
+          width: "150",
+        })) || [];
 
       setBuddies(mappedBuddies);
     });

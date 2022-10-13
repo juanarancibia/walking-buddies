@@ -9,6 +9,7 @@ export const mintBuddy = async (URI) => {
     const provider = new ethers.providers.Web3Provider(Web3.givenProvider);
     const signer = await provider.getSigner();
     const { abi } = NFTBuddyAbi;
+    console.log({ ContractAddress, abi });
 
     const nftContract = new ethers.Contract(ContractAddress, abi, signer);
 
