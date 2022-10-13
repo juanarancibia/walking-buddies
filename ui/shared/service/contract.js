@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import Web3 from "web3";
-import NFTBuddyAbi from "../../../contracts/build/contracts/BuddyNFT.json";
+import NFTBuddyAbi from "../../contracts/build/contracts/BuddyNFT.json";
 
 const ContractAddress = NFTBuddyAbi.networks[5777].address;
 
