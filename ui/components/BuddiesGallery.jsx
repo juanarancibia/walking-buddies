@@ -1,9 +1,9 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { BuddiesUpdatedContext } from "../shared/context/BuddiesUpdatedContext";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 import { mintBuddy } from "../shared/service/contract";
-import { useWeb3React } from "@web3-react/core";
 
 const buddies = [
   {
@@ -78,16 +78,21 @@ const StyledPlayer = styled(Player)`
   scale: ${(props) => (props.selectedBuddy ? 1.3 : "")};
 `;
 
-const BuddiesGallery = () => {
+const BuddiesGallery = (props) => {
   const [selectedBuddy, setSelectedBuddy] = useState({});
-  const { account } = useWeb3React();
+  const { buddiesUpdated, setBuddiesUpdated } = useContext(
+    BuddiesUpdatedContext
+  );
 
   const handleSelect = (buddy) => {
     setSelectedBuddy(buddy.id == selectedBuddy.id ? {} : buddy);
   };
 
   const handleMintBuddy = () => {
-    mintBuddy(window.ethereum.selectedAddress, selectedBuddy.src);
+    mintBuddy(selectedBuddy.src).then(() => {
+      setBuddiesUpdated((current) => !current);
+      props.closeModal();
+    });
   };
 
   return (

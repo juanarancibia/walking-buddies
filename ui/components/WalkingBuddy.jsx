@@ -1,7 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { RandomPositionContext } from "../shared/context/RandomPositionContext";
 import {
   angle,
   getRandomNumber,
@@ -32,9 +31,6 @@ const WalkingBuddy = (props) => {
     style: { height: `${props.height}px`, width: `${props.width}px` },
   };
 
-  const { changePosition, setChangePosition } = useContext(
-    RandomPositionContext
-  );
   const playerRef = useRef();
   const [currentDegrees, setCurrentDegrees] = useState(0);
   const [buddyPosition, setBuddyPosition] = useState({
@@ -46,15 +42,17 @@ const WalkingBuddy = (props) => {
   let isMousedown = false;
 
   const handleMouseMove = (e) => {
-    const { clientX, clientY } = e; //Position of the cursor
-    const { left, top, width, height } =
-      playerRef?.current?.container.getBoundingClientRect();
-    const anchorX = left + width / 2;
-    const anchorY = top + height / 2;
+    if (playerRef?.current) {
+      const { clientX, clientY } = e; //Position of the cursor
+      const { left, top, width, height } =
+        playerRef.current.container.getBoundingClientRect();
+      const anchorX = left + width / 2;
+      const anchorY = top + height / 2;
 
-    setCurrentDegrees(angle(clientX, clientY, anchorX, anchorY));
+      setCurrentDegrees(angle(clientX, clientY, anchorX, anchorY));
 
-    if (isMousedown) handleDrag(clientX, clientY, width, height);
+      if (isMousedown) handleDrag(clientX, clientY, width, height);
+    }
   };
 
   const handleDrag = (clientX, clientY, width, height) => {
@@ -66,37 +64,39 @@ const WalkingBuddy = (props) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousemove", handleMouseMove);
+    if (playerRef?.current) {
+      document.addEventListener("mousemove", handleMouseMove);
 
-    playerRef.current.container.addEventListener("mousedown", () => {
-      isMousedown = true;
-    });
-    playerRef.current.container.addEventListener("mouseup", () => {
-      isMousedown = false;
-      setBuddyPosition((current) => ({
-        ...current,
-        animationTime: getRandomNumber(10, 15),
-      }));
-    });
+      playerRef.current.container.addEventListener("mousedown", () => {
+        isMousedown = true;
+      });
+      playerRef.current.container.addEventListener("mouseup", () => {
+        isMousedown = false;
+        setBuddyPosition((current) => ({
+          ...current,
+          animationTime: getRandomNumber(10, 15),
+        }));
+      });
 
-    const { randomTop, randomLeft } = getRandomPosition();
-    const animationTime = getRandomNumber(10, 15);
+      const { randomTop, randomLeft } = getRandomPosition();
+      const animationTime = getRandomNumber(10, 15);
 
-    setBuddyPosition({
-      top: randomTop,
-      left: randomLeft,
-      animationTime: animationTime,
-    });
+      setBuddyPosition({
+        top: randomTop,
+        left: randomLeft,
+        animationTime: animationTime,
+      });
 
-    walkingAnimation();
-  }, []);
+      walkingAnimation();
+    }
+  }, [playerRef.current]);
 
   const walkingAnimation = () => {
-    if (!isMousedown) {
+    if (!isMousedown && playerRef?.current) {
       const { randomTop, randomLeft } = getRandomPosition();
 
       const { left, top, width, height } =
-        playerRef?.current?.container.getBoundingClientRect();
+        playerRef.current.container.getBoundingClientRect();
       const anchorX = left + width / 2;
       const anchorY = top + height / 2;
 
@@ -111,21 +111,6 @@ const WalkingBuddy = (props) => {
 
     setTimeout(walkingAnimation, (buddyPosition.animationTime + 1.5) * 1000);
   };
-
-  useEffect(() => {
-    if (changePosition) {
-      const { randomTop, randomLeft } = getRandomPosition();
-      const animationTime = getRandomNumber(2, 12);
-
-      setBuddyPosition({
-        animationTime: animationTime,
-        top: randomTop,
-        left: randomLeft,
-      });
-
-      setChangePosition(false);
-    }
-  }, [changePosition, setChangePosition]);
 
   return (
     <PlayerStyled
