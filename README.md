@@ -5,10 +5,12 @@ Connect your wallet and add your walking buddies!
 ### Local execution
 
 - Start ganache (port 7545)
-- Move to directory `contracts`
+- Move to directory `ui/contracts`
 - Run `npm install`
 - Run `truffle migrate`
-- Open [Walking buddies - Webpage](https://walking-buddies.vercel.app/)
+- Move to directory `ui`
+- Run `npm install` and then `npm run dev`
+- Open **localhost:3000**
 
 ### Steps for use
 
