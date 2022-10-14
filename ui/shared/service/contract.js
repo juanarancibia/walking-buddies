@@ -1,15 +1,16 @@
 import { ethers } from "ethers";
 import Web3 from "web3";
-import NFTBuddyAbi from "../../contracts/build/contracts/BuddyNFT.json";
+import BuddyNFT from "../../contracts/BuddyNFT.json";
 
-const ContractAddress = NFTBuddyAbi.networks[5777].address;
+const ContractAddress = BuddyNFT.networks[5].address;
 
 export const mintBuddy = async (URI) => {
   try {
+    const { abi } = BuddyNFT;
+    console.log({ ContractAddress, abi });
+
     const provider = new ethers.providers.Web3Provider(Web3.givenProvider);
     const signer = await provider.getSigner();
-    const { abi } = NFTBuddyAbi;
-    console.log({ ContractAddress, abi });
 
     const nftContract = new ethers.Contract(ContractAddress, abi, signer);
 
@@ -29,9 +30,11 @@ export const mintBuddy = async (URI) => {
 
 export const getBuddies = async () => {
   try {
+    console.log({ ContractAddress, abi });
+    const { abi } = BuddyNFT;
+
     const provider = new ethers.providers.Web3Provider(Web3.givenProvider);
     const signer = await provider.getSigner();
-    const { abi } = NFTBuddyAbi;
 
     const nftContract = new ethers.Contract(ContractAddress, abi, signer);
 
