@@ -20,5 +20,6 @@ Connect your wallet and add your walking buddies!
 
 ### Steps for use
 
+- Metamask has to be installed for the page to work
 - Link your wallet using Metamask
 - Mint some buddies!
