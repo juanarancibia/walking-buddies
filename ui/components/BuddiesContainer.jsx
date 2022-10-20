@@ -28,7 +28,7 @@ const BuddiesContainer = (props) => {
   useEffect(() => {
     updateBuddies();
 
-    window.ethereum.on("accountsChanged", () => {
+    window.ethereum?.on("accountsChanged", () => {
       updateBuddies();
     });
   }, [buddiesUpdated]);

@@ -5,9 +5,13 @@ import BuddyNFT from "../../contracts/BuddyNFT.json";
 const ContractAddress = BuddyNFT.networks[5].address;
 
 export const mintBuddy = async (URI) => {
+  if (!window.ethereum?.selectedAddress) {
+    alert("Please connect metamask to Goerli!");
+    return;
+  }
+
   try {
     const { abi } = BuddyNFT;
-    console.log({ ContractAddress, abi });
 
     const provider = new ethers.providers.Web3Provider(Web3.givenProvider);
     const signer = await provider.getSigner();
@@ -20,7 +24,6 @@ export const mintBuddy = async (URI) => {
     );
 
     let tx = nftTx.wait();
-    console.log("Mined!", tx);
 
     return tx;
   } catch (err) {
@@ -29,6 +32,11 @@ export const mintBuddy = async (URI) => {
 };
 
 export const getBuddies = async () => {
+  if (!window.ethereum?.selectedAddress) {
+    alert("Please connect metamask to Goerli!");
+    return;
+  }
+
   try {
     console.log({ ContractAddress, abi });
     const { abi } = BuddyNFT;
