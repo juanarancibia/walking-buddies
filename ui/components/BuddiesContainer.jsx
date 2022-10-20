@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { BuddiesUpdatedContext } from "../shared/context/BuddiesUpdatedContext";
 import { getBuddies } from "../shared/service/contract";
-import useMetaMask from "../shared/hooks/useMetaMask";
 import ControlButtons from "./ControlButtons";
 import WalkingBuddy from "./WalkingBuddy";
 
